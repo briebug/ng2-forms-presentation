@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-6">
+        <h1>Model Driven Form Validation</h1>
+        <form id="registrationForm" name="registrationForm" [formGroup]="registrationForm"
+              (ngSubmit)="registerUser(registrationForm)" novalidate>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" class="form-control" [(ngModel)]="user.userName"
+                       placeholder="Username" formControlName="username">
+
+                <small [hidden]="!isFieldValid(registrationForm, 'username', 'required')">
+                    Username is required.
+                </small>
+
+                <small [hidden]="!isFieldValid(registrationForm, 'username', 'minlength')">
+                    Username must have a minimum of 5 characters.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="text" class="form-control" [(ngModel)]="user.email"
+                       placeholder="Email" formControlName="email">
+
+                <small [hidden]="!isFieldValid(registrationForm, 'email', 'required')">
+                    Email is required.
+                </small>
+
+                <small [hidden]="!isFieldValid(registrationForm, 'email', 'email')">
+                    Email must be valid.
+                </small>
+
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" class="form-control" [(ngModel)]="user.password"
+                       placeholder="Password" formControlName="password">
+
+                <small [hidden]="!isFieldValid(registrationForm, 'password', 'required')">
+                    Password is required.
+                </small>
+
+                <small [hidden]="!isFieldValid(registrationForm, 'password', 'validateEqual')">
+                    Passwords must match.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="comparePassword">Compare Password</label>
+                <input id="comparePassword" name="comparePassword" type="comparePassword" class="form-control" [(ngModel)]="user.comparePassword"
+                       placeholder="Compare Password" formControlName="comparePassword">
+
+                <small [hidden]="!isFieldValid(registrationForm, 'comparePassword', 'required')">
+                    Compare Password is required.
+                </small>
+
+                <small [hidden]="!isFieldValid(registrationForm, 'comparePassword', 'validateEqual')">
+                    Passwords must match.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </form>
+
+    </div>
+</div>
